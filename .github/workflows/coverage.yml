@@ -24,4 +24,4 @@ jobs:
         run: ./mvnw clean test jacoco:report
 
       - name: Upload to Coveralls
-        run: ./mvnw coveralls:report --define repoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: ./mvnw coveralls:report -Dservice_name=github
