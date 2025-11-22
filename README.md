@@ -65,4 +65,4 @@ docker composer up --build roman numbers-tests
 - JUnit/Mockito/Spring Testing: ya que son las herramientas más utilizadas y las apropiadas para utilizar en conjunto y realizar tests correctamente
 
 ##Rutas
-- : [![API SWAGGER](http://localhost:8080/swagger-ui/index.html)]
+- API SWAGGER: http://localhost:8080/swagger-ui/index.html
