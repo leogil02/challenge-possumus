@@ -1,6 +1,13 @@
 services:
   roman-numbers-api:
-    build: ./
+    build:
+      dockerfile: Dockerfile
+      target: runtime
     ports:
       - "8080:8080"
     container_name: roman-numbers-api
+
+  roman-numbers-tests:
+    build:
+      dockerfile: Dockerfile
+      target: tests
