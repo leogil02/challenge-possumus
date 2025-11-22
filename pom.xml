@@ -83,7 +83,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version>
+                <version>0.8.13</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -91,22 +91,14 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.eluder.coveralls</groupId>
+                <groupId>com.github.hazendaz.maven</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.3.0</version>
+                <version>5.0.0</version>
                 <configuration>
-                    <jacocoReportPath>${project.basedir}/target/site/jacoco/jacoco.xml</jacocoReportPath>
-                    <serviceName>github</serviceName>
+                    <repoToken>AeBwrIL5qPcxo2F0vXC1eWvNrvNP6S1H9</repoToken>
                 </configuration>
             </plugin>
 		</plugins>

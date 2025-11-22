@@ -2,9 +2,9 @@ name: Coverage
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -20,11 +20,5 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build and test with Maven
-        run: ./mvnw clean test jacoco:report
-
-      - name: Upload to Coveralls
-        run: |
-          ./mvnw coveralls:report \
-            -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }} \
-            -Dservice_name=github
+      - name: Build, test and report with Maven
+        run: ./mvnw clean test jacoco:report coveralls:report
