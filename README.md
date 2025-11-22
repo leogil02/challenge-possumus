@@ -4,7 +4,7 @@
 
 [![Coverage](https://github.com/leogil02/challenge-possumus/actions/workflows/coverage.yml/badge.svg)](https://github.com/leogil02/challenge-possumus/actions/workflows/coverage.yml)
 
-##Desafío a realizar
+## Desafío a realizar
 
 ### Fase 1
 
@@ -44,25 +44,27 @@ Para los puntos plus de cada fase, en lo relacionado a la infraestructura de tes
 
 Completar y modificar este readme e incluirlo como parte del repositorio agregando detalles sobre cómo construir el proyecto desde cero y ponerlo en ejecución. 
 
-##Pre - requisitos
+## Pre - requisitos
 - Docker instalado
 - Docker compose instalado
 - Puerto 8080 libre
 
-##Correr aplicación
+## Correr aplicación
 docker compose up --build roman-numbers-api
 
-##Correr tests
+## Correr tests
 docker composer up --build roman numbers-tests
 
-##Tecnologías utilizadas
+## Tecnologías utilizadas
 - Java 21
 - Spring Boot 4.0.0
 
-##Decisiones tomadas
+## Decisiones tomadas
 - Arquitectura en capas con influencia de arquitectura hexagonal: para poder organizar mejor la estructura del proyecto y poder manejar cambios a futuro de una forma apropiada
 - Docker: para hacer la aplicación portatil
 - JUnit/Mockito/Spring Testing: ya que son las herramientas más utilizadas y las apropiadas para utilizar en conjunto y realizar tests correctamente
 
-##Rutas
-- : [![API SWAGGER](http://localhost:8080/swagger-ui/index.html)]
+## Rutas
+- API SWAGGER: http://localhost:8080/swagger-ui/index.html
+- Conversor romano a entero: http://localhost:8080/api/roman-numeral/to-int
+- Conversor entero a romano: http://localhost:8080/api/roman-numeral/to-roman
