@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RomanNumeralServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">challenge_possumus_tech</a> &gt; <a href="index.source.html" class="el_package">com.leonardogil.challenge_possumus_tech.application.service</a> &gt; <span class="el_source">RomanNumeralServiceImpl.java</span></div><h1>RomanNumeralServiceImpl.java</h1><pre class="source lang-java linenums">package com.leonardogil.challenge_possumus_tech.application.service;
+
+import com.leonardogil.challenge_possumus_tech.domain.exceptions.IntegerOutOfRangeException;
+import com.leonardogil.challenge_possumus_tech.domain.model.RomanEnum;
+import com.leonardogil.challenge_possumus_tech.domain.model.RomanGreedyValue;
+import org.springframework.stereotype.Service;
+
+
+@Service
+<span class="fc" id="L10">public class RomanNumeralServiceImpl implements IRomanNumeralService{</span>
+
+    @Override
+    public Integer toInteger(String romanNumber) {
+<span class="fc" id="L14">        romanNumber = romanNumber.toUpperCase();</span>
+<span class="fc" id="L15">        int sum = 0;</span>
+
+<span class="fc bfc" id="L17" title="All 2 branches covered.">        for(int i=0; i&lt;romanNumber.length(); i++){</span>
+<span class="fc" id="L18">            int currentValue = RomanEnum.valueOf(String.valueOf(romanNumber.charAt(i))).getValue();</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">            if(romanNumber.length() &gt; i + 1){</span>
+<span class="fc" id="L20">                int nextValue = RomanEnum.valueOf(String.valueOf(romanNumber.charAt(i + 1))).getValue();</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">                if (nextValue &gt; currentValue) {</span>
+<span class="fc" id="L22">                    sum -= currentValue;</span>
+                } else {
+<span class="fc" id="L24">                    sum += currentValue;</span>
+                }
+<span class="fc" id="L26">            } else {</span>
+<span class="fc" id="L27">                sum += currentValue;</span>
+            }
+        }
+<span class="fc" id="L30">        return sum;</span>
+    }
+
+    @Override
+    public String toRoman(Integer intNumber) {
+
+<span class="fc bfc" id="L36" title="All 6 branches covered.">        if(intNumber == null || intNumber &lt; 1 || intNumber &gt; 3999)</span>
+<span class="fc" id="L37">            throw new IntegerOutOfRangeException(&quot;El número debe estar entre 1 y 3999&quot;);</span>
+
+<span class="fc" id="L39">        StringBuilder romanNumber = new StringBuilder();</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        for(RomanGreedyValue romanGreedyValue : RomanGreedyValue.values()){</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">            while(intNumber &gt;= romanGreedyValue.value){</span>
+<span class="fc" id="L42">                romanNumber.append(romanGreedyValue.symbol);</span>
+<span class="fc" id="L43">                intNumber -= romanGreedyValue.value;</span>
+            }
+        }
+<span class="fc" id="L46">        return romanNumber.toString();</span>
+    }
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

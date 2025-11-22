@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SubtractionValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">challenge_possumus_tech</a> &gt; <a href="index.source.html" class="el_package">com.leonardogil.challenge_possumus_tech.domain.validation</a> &gt; <span class="el_source">SubtractionValidator.java</span></div><h1>SubtractionValidator.java</h1><pre class="source lang-java linenums">package com.leonardogil.challenge_possumus_tech.domain.validation;
+
+import com.leonardogil.challenge_possumus_tech.domain.exceptions.RomanSubtractionException;
+import com.leonardogil.challenge_possumus_tech.domain.model.RomanEnum;
+
+import java.util.Set;
+
+<span class="nc" id="L8">public class SubtractionValidator {</span>
+
+<span class="fc" id="L10">    private static final Set&lt;String&gt; VALID_SUBTRACTIONS = Set.of(</span>
+            &quot;IV&quot;, &quot;IX&quot;, &quot;XL&quot;, &quot;XC&quot;, &quot;CD&quot;, &quot;CM&quot;
+    );
+
+    public static void validator(String romanNumber) {
+
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        for (int i = 0; i &lt; romanNumber.length() - 1; i++) {</span>
+
+<span class="fc" id="L18">            char currentChar = romanNumber.charAt(i);</span>
+<span class="fc" id="L19">            char nextChar = romanNumber.charAt(i + 1);</span>
+
+<span class="fc" id="L21">            int currentValue = RomanEnum.valueOf(String.valueOf(currentChar)).getValue();</span>
+<span class="fc" id="L22">            int nextValue = RomanEnum.valueOf(String.valueOf(nextChar)).getValue();</span>
+
+<span class="fc bfc" id="L24" title="All 2 branches covered.">            if (nextValue &gt; currentValue) {</span>
+<span class="fc" id="L25">                String subtraction = &quot;&quot; + currentChar + nextChar;</span>
+
+                //Directamente es una substracción invalida (por ejemplo IM)
+<span class="fc bfc" id="L28" title="All 2 branches covered.">                if (!VALID_SUBTRACTIONS.contains(subtraction)) throw new RomanSubtractionException(</span>
+                        &quot;La substracción '&quot; + subtraction + &quot;' no es válida&quot;
+                );
+
+                //Valida que en un futuro no aparezca nada con un valor mayor o igual al símbolo pequeño de la resta.
+                //Ignora el valor futuro se encuentra en una resta
+                //Por ejemplo IVI
+<span class="fc bfc" id="L35" title="All 2 branches covered.">                for(int j = i + 2; j &lt; romanNumber.length(); j++){</span>
+
+<span class="fc bfc" id="L37" title="All 2 branches covered.">                    if(romanNumber.length() &gt; j + 1){</span>
+<span class="fc" id="L38">                        String futureValueSubtraction = &quot;&quot; + romanNumber.charAt(j) + romanNumber.charAt(j + 1);</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">                        if(VALID_SUBTRACTIONS.contains(futureValueSubtraction)){</span>
+                            //Para ignorar el próximo valor también
+<span class="fc" id="L41">                            j++;</span>
+<span class="fc" id="L42">                            continue;</span>
+                        }
+                    }
+
+<span class="fc" id="L46">                    int futureValue = RomanEnum.valueOf(String.valueOf(romanNumber.charAt(j))).getValue();</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">                    if(futureValue &gt;= currentValue ){</span>
+<span class="fc" id="L48">                        throw new RomanSubtractionException(&quot;Teniendo la substracción '&quot; + subtraction +</span>
+                                &quot;', se añadió un símbolo de valor igual o menor al &quot; +
+                                &quot;valor más pequeño de la sustracción (&quot; + currentChar + &quot;) luego de esta&quot;);
+                    }
+                }
+
+
+
+            }
+
+            //Doble símbolo antes de una resta
+            //Por ejemplo IIV
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            if (i - 1 &gt;= 0) {</span>
+<span class="fc" id="L61">                char previousChar = romanNumber.charAt(i - 1);</span>
+<span class="fc" id="L62">                int previousValue = RomanEnum.valueOf(String.valueOf(previousChar)).getValue();</span>
+
+<span class="fc bfc" id="L64" title="All 4 branches covered.">                if (previousValue == currentValue &amp;&amp; nextValue &gt; currentValue) {</span>
+<span class="fc" id="L65">                    String substraction = &quot;&quot; + previousChar + currentChar + nextChar;</span>
+<span class="fc" id="L66">                    throw new RomanSubtractionException(&quot;La substracción '&quot; + substraction + &quot;' no es válida&quot;);</span>
+                }
+            }
+
+        }
+
+        //Valida que no se repita 2 veces el mismo patrón de resta
+<span class="fc" id="L73">        VALID_SUBTRACTIONS.forEach(subtraction -&gt; {</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">            if(romanNumber.split(subtraction, -1).length &gt; 2) {</span>
+<span class="fc" id="L75">                throw new RomanSubtractionException(&quot;La resta '&quot; + subtraction + &quot;' se repitió más de una vez&quot;);</span>
+            }
+<span class="fc" id="L77">        });</span>
+
+
+
+<span class="fc" id="L81">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
