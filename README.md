@@ -53,7 +53,7 @@ Completar y modificar este readme e incluirlo como parte del repositorio agregan
 docker compose up --build roman-numbers-api
 
 ## Correr tests
-docker composer up --build roman numbers-tests
+docker compose up --build roman-numbers-tests
 
 ## Tecnologías utilizadas
 - Java 21
