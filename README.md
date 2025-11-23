@@ -53,7 +53,7 @@ Completar y modificar este readme e incluirlo como parte del repositorio agregan
 docker compose up --build roman-numbers-api
 
 ## Correr tests
-docker composer up --build roman numbers-tests
+docker compose up --build roman-numbers-tests
 
 ## Tecnologías utilizadas
 - Java 21
@@ -64,7 +64,12 @@ docker composer up --build roman numbers-tests
 - Docker: para hacer la aplicación portatil
 - JUnit/Mockito/Spring Testing: ya que son las herramientas más utilizadas y las apropiadas para utilizar en conjunto y realizar tests correctamente
 
-## Rutas
+## Rutas servidor deployado
+- API SWAGGER: https://challenge-possumus.onrender.com/swagger-ui/index.html
+- Conversor romano a entero: https://challenge-possumus.onrender.com/api/roman-numeral/to-int
+- Conversor entero a romano: https://challenge-possumus.onrender.com/api/roman-numeral/to-roman
+
+## Rutas locales
 - API SWAGGER: http://localhost:8080/swagger-ui/index.html
 - Conversor romano a entero: http://localhost:8080/api/roman-numeral/to-int
 - Conversor entero a romano: http://localhost:8080/api/roman-numeral/to-roman
