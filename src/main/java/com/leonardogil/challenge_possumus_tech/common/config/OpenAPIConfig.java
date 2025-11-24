@@ -16,6 +16,10 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 @Server(
                         description = "Local",
                         url = "http://localhost:8080"
+                ),
+                @Server(
+                        description = "Render",
+                        url = "https://challenge-possumus.onrender.com"
                 )
         }
 )
